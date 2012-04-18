@@ -1,0 +1,22 @@
+
+APLORM is a object relational mapping system that uses the generate class script to create your classes from a database. The script will use the table name for the class name and the fields of the table will be represented as variables in the class.
+
+The generate classes script is currently executed via a SSL connect but this code can be removed, a CLI script will be created shortly.
+
+The dbobject class allows you to interact with the database, any object that extends it and meets the naming convention will be able to be saved into the database.
+
+Example usage of the dbobject class:
+
+// This example will load client 324 from the database, update their password and save it back to the database using persist.
+$client = new Client();
+$client->initFromDb(324);
+$client->setPassword(sha1("password"));
+$client->persist();
+
+// This example creates a new user by setting up the username and password
+$new_client = new Client();
+$new_client->setUsername('user');
+$new_client->setPassword(sha1("password"));
+$new_client->persist();
+
+The persist method checks id variable is set, if it is not it will insert into the database and then set it to the insert id of the new record, so you don't really need to worry about the id field.
